@@ -1,0 +1,26 @@
+
+Nome: Thiago de Oliveira Campos dos Reis;
+Matrícula: 130038199;
+Matéria: Sistemas Embarcados
+
+Aula 01
+
+O que são sistemas embarcados? 
+	Sistemas embarcados são sistemas que operam em uma plataforma (hardware ou software ou ambos) executando uma função específica.
+O que são sistemas microprocessados?
+	 Sistemas microprocessados são sistemas que operam em microcontroladores afim de executar uma ou uma série de instruções.
+Apresente aplicações de sistemas embarcados: 
+	Para indústria automotiva;
+		 Na indústria automotiva há um sistema embarcado controlando o painel de instrumento do veículo.
+	Para automação industrial; 
+		Na automação industrial há um sistema embarcado controlando o movimento dos braços robóticos. 
+	Para eletrodomésticos; 
+		Cafeteira que pode ser pré programada.
+Cite arquiteturas possíveis e as diferenças entre elas.
+	 FPGAs, Microcontroladores, GPPs, DSPs, ASICs, SoCs, MPSoCs;
+
+Por quê usamos o Raspberry Pi na disciplina ao invés de outro System on Chip? 
+A Raspberry Pi é utilizada na disciplina por ser uma opção de fácil acesso, bom custo e amplamente utilizada.
+
+
+
