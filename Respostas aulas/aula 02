@@ -1,0 +1,24 @@
+1. O Linux foi criado por Linus baseado no sistema Minix.
+2. O que é daemon?
+
+3. Shell é o terminal de comando do sistema GNU/Linux.
+4. O super usuário é  um usuário com permissão para edição de arquivos em diretórios importantes.
+5. Tab
+6. Seta para cima.
+7.a. man <nome_comando>
+b. ls
+c. pwd
+d. cd <caminho_do_diretório>
+e. mkdir <nome_da_pasta> 
+f. rm <nome_do_arquivo>
+g. rm -r <nome_da_pasta>
+h. cp <nome_do_arquivo> <caminho_do_diretorio>
+i. cp <nome_do_diretorio> -r <caminho_do_diretorio>
+j. mv <nome_do_diretorio> <caminho_do_diretorio> 
+k. mv <nome_do_diretorio>  <caminho_do_diretorio>
+l. mv <nome_do_diretorio> <novo_nome_do_diretorio>
+m. cat <nome_do_arquivo>
+n. file <nome_do_arquivo>
+o. clear ou crt l
+p. ls | grep <*nome*>;
+q. diff <nome_arquivo> <nome_outro_arquivo>
