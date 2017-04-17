@@ -193,14 +193,114 @@ int main(int argc, char **argv){
 
 Salve-a em um arquivo separado chamado 'num_caracs.c'. Salve o protótipo em um arquivo chamado 'num_caracs.h'. Compile 'num_caracs.c' para gerar o objeto 'num_caracs.o'.
 
+//num_caracs.h
+//num_caracs.h
+#ifndef NUM_CARACS_H
+#define NUM_CARACS_H
+	int count_caracter(char *string);
+#endif
+
+//num_caracs.c
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+int count_caracter(char *string){
+	int i = 0;
+	int tamanho;
+	//implementation of strlen using the manual method	
+	//tamanho = strlen(string);
+	while(string[i] != '\0'){
+		i++;
+	}	
+	tamanho = i;
+	return tamanho;
+}
+
+//q8.c
+#include <stdio.h>
+#include <stdlib.h>
+#include "num_caracs.h"
+
+int main(){
+	char *string;
+	int tamanho;
+	
+	string = malloc(100*sizeof(char));
+	scanf("%s", string);	
+		
+	tamanho = count_caracter(string);
+	printf("%d\n", tamanho);
+
+	return 0;	
+	
+}
+
+//makefile
+q8: q8.o num_caracs.o
+	gcc $(CFLGAS) -o q8 q8.o num_caracs.o
+num_caracs.o: num_caracs.c num_caracs.h
+	gcc $(CFLAGS) -c num_caracs.c
+q8.o: q8.c num_caracs.h
+	gcc $(CFLAGS) -c q8.c
+
 9. Re-utilize o objeto criado na questão 8 para criar um código que imprime cada argumento de entrada e a quantidade de caracteres de cada um desses argumentos. Por exemplo, considerando que o código criado recebeu o nome de 'ola_num_caracs_1':
 	$ ./ola_num_caracs_1 Eu Mesmo
 	$ Argumento: ./ola_num_caracs_1 / Numero de caracteres: 18
 	$ Argumento: Eu / Numero de caracteres: 2
 	$ Argumento: Mesmo / Numero de caracteres: 5
 	$
+//mylib.h
+#ifndef MYLYB_H
+#define MYLYB_H
+	extern void mylib(char **argumento, int index);
+#endif
+
+//q9.c
+#include <stdio.h>
+#include <stdlib.h>
+#include "mylib.h"
+
+int main(int argc, char **argv){
+	mylib(argv, argc);
+
+
+	return 0;
+}
+
+//mylib.c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+void mylib(char **argumento, int index){
+	int i, j;
+	int tamanho;
+	i = 0; j = 0;
+	
+	for(j = 0; j < index; j++){
+		tamanho = strlen(argumento[j]);
+		printf("Argumento: %s / Numero de caracteres: %d\n", argumento[j], tamanho);
+	}		
+}
+
+
 
 10. Crie um Makefile para a questão anterior.
+
+q8: q8.o num_caracs.o
+	gcc $(CFLGAS) -o q8 q8.o num_caracs.o
+num_caracs.o: num_caracs.c num_caracs.h
+	gcc $(CFLAGS) -c num_caracs.c
+q8.o: q8.c num_caracs.h
+	gcc $(CFLAGS) -c q8.c
+
+q9 : q9.o mylib.o
+	gcc $(CFLAGS)  -o q9 q9.o mylib.o
+mylib.o : mylib.c mylib.h
+	gcc $(CLAGS) -c mylib.c
+q9.o : q9.c mylib.c mylib.h
+	gcc $(CFLAGS) -c q9.c 
 
 11. Re-utilize o objeto criado na questão 8 para criar um código que imprime o total de caracteres nos argumentos de entrada. Por exemplo, considerando que o código criado recebeu o nome de 'ola_num_caracs_2':
 	$ ./ola_num_caracs_2 Eu Mesmo

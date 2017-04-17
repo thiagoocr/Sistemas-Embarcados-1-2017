@@ -1,0 +1,73 @@
+Nome: Thiago de Oliveira Campos dos Reis
+Matrícula: 130038199
+//aula 02 Prático
+
+Data: 09/03/2017
+
+Para todas as questões, escreva os comandos correspondentes no terminal.
+
+1. Escreva o texto "Ola mundo cruel!" em um arquivo denominado "Ola_mundo.txt". Apresente o conteúdo deste arquivo no terminal.
+	echo "Ola mundo cruel!" > Ola_mundo.txt
+
+2. Apresente o nome de todos os arquivos e pastas na pasta 'root'.
+sudo su:
+	<senha>
+ls
+--não mostrou nada--
+ls -la
+total 44
+drwx------  8 root root 4096 Mar  7 20:27 .
+drwxr-xr-x 23 root root 4096 Fev  7 12:45 ..
+drwx------  2 root root 4096 Fev  7 13:00 .aptitude
+-rw-------  1 root root  528 Abr  6 18:35 .bash_history
+-rw-r--r--  1 root root 4000 Nov 21 14:14 .bashrc
+drwx------  5 root root 4096 Fev  1 14:50 .cache
+drwx------  3 root root 4096 Fev  9 16:46 .config
+drwx------  3 root root 4096 Fev  1 14:50 .dbus
+drwxr-xr-x  3 root root 4096 Fev  1 14:50 .linuxmint
+-rw-r--r--  1 root root  148 Ago 17  2015 .profile
+drwx------  3 root root 4096 Abr  5 20:25 .synaptic
+
+
+3. Apresente o tipo de todos os arquivos e pastas na pasta 'root'.
+.
+..
+.aptitude
+.bash_history
+.bashrc
+.cache
+.config
+.dbus
+.linuxmint
+.profile
+.synaptic
+
+
+4. Apresente somente as pastas dentro da pasta 'root'.
+ls -d
+. "resultado da tela foi somente o "." "
+
+5. DESCUBRA EM QUE DIA DA SEMANA CAIU O SEU ANIVERSÁRIO NOS ÚLTIMOS DEZ ANOS.
+
+Para as questões a seguir, use a pasta no endereço https://github.com/DiogoCaetanoGarcia/Sistemas_Embarcados/raw/master/Questoes/Arqs_aula_02.zip
+
+6. Liste somente os arquivos com extensão .txt.
+ls *.txt
+
+7. Liste somente os arquivos com extensão .png.
+ls *.png
+
+8. Liste somente os arquivos com extensão .jpg.
+ls *.jpg
+
+9. Liste somente os arquivos com extensão .gif.
+ls *.gif
+
+10. Liste somente os arquivos que contenham o nome 'cal'.
+find / -name *cal*
+
+11. Liste somente os arquivos que contenham o nome 'tux'.
+find / -name *tux*
+
+12. Liste somente os arquivos que comecem com o nome 'tux'.
+find / -name *tux*
