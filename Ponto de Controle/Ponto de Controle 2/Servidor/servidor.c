@@ -14,11 +14,14 @@ int socket_id;
 void sigint_handler(int signum);
 void print_client_message(int client_socket);
 void end_server(void);
+void sensores(char *sensor,int n_socket);
 
 int main (int argc, char* const argv[])
 {
 	unsigned short servidorPorta;
 	struct sockaddr_in servidorAddr;
+    wiringPiSetup() ;
+    mcp3004Setup(100, 0);
 
 	if (argc < 2)
 	{
@@ -90,7 +93,9 @@ int main (int argc, char* const argv[])
 		fprintf(stderr, "Conexão do Cliente %s\n", inet_ntoa(clienteAddr.sin_addr));
 		
 		fprintf(stderr, "Tratando comunicacao com o cliente... ");
-		print_client_message(socketCliente);
+
+		menu(socketCliente);
+
 		fprintf(stderr, "Feito!\n");
 
 		fprintf(stderr, "Fechando a conexao com o cliente... ");
@@ -100,59 +105,122 @@ int main (int argc, char* const argv[])
 	return 0;
 }
 
+
+
+void menu(int client_socket)
+{	
+    int n_socket = client_socket;	
+	int length;
+	char* rx;
+	char buffer[5];
+    int valor =analogRead(100+0);
+
+ 	fprintf(stderr, "\nMensagem enviada pelo cliente tem ");
+
+	read(client_socket, &length, sizeof (length));
+	fprintf(stderr, "%d bytes.", length);
+	rx = (char*) malloc (length);
+
+	read(client_socket, rx, length);
+	fprintf(stderr,"\n\n   Mensagem = %s\n\n", rx);
+	//free (text);
+	sleep(1);
+
+	fprintf(stderr, "Mandando mensagem ao cliente... ");
+
+    snprintf(buffer,5, "%d",valor);
+
+    sleep(2);
+
+    length = strlen(buffer) + 1;
+	write(client_socket, &length, sizeof(length));
+	write(client_socket, buffer, length);
+	fprintf(stderr, "Feito!\n");
+    
+    int valor_menu = atoi(rx);
+
+	if  (valor_menu == 1)
+	{
+		quarto(client_socket);
+	}
+	if  (valor_menu == 2)
+	{
+		quarto(param_envio);
+	}
+	
+     
+        free(rx);
+} 
+
+
+void quarto(int* client_socket)
+{
+	read(client_socket, &length, sizeof (length));
+	fprintf(stderr, "%d bytes.", length);
+	rx = (char*) malloc (length);
+	int valor = atoi(rx);
+
+	if (valor == 1)
+		tomadas(1);
+	if (valor == 2)
+		sensores(client_socket)
+		break;
+}
+
+
+
+
+
+
+
+
+
+void sensores(char* sensor,int n_socket)
+
+{
+	fprintf(stderr,"Estou em sensores inicio da função");
+    int length;
+	char* rx;
+
+	int client_socket = n_socket;
+		while(1)
+		{
+	        int socketCliente;
+		    struct sockaddr_in clienteAddr;
+		    unsigned int clienteLength;
+            int valor_menu;
+					
+			clienteLength = sizeof(clienteAddr);
+			if((socketCliente = accept(socket_id, (struct sockaddr *) &clienteAddr, &clienteLength)) < 0)
+				fprintf(stderr, "Falha no accept().\n");
+
+			read(client_socket, &length, sizeof (length));
+	        
+
+		
+			rx = (char*) malloc (length);
+            read(client_socket, rx, length);
+			valor_menu = atoi(rx);
+            fprintf(stderr,"o opção foi %d",valor_menu);
+
+    //         if (valor_menu == 1)
+				// {
+				// 	fprintf(stderr, "Cliente pediu para o servidor fechar.\n");
+    //                 fprintf(stderr, "estou em sensores. \n");
+				// 	end_server();
+				// }
+
+			
+			
+		}
+}
+
 void sigint_handler(int signum)
 {
 	fprintf(stderr, "\nRecebido o sinal CTRL+C... vamos desligar o servidor!\n");
 	end_server();
 }
 
-void print_client_message(int client_socket)
-{	wiringPiSetup() ;
-	mcp3004Setup(100, 0);
-	int length;
-	char* text;
-	int a = analogRead(100+1);
-
-	char *b;
-            b = (char*) a;
-	fprintf(stderr, "\nMensagem enviada pelo cliente tem ");
-
-	read(client_socket, &length, sizeof (length));
-	fprintf(stderr, "%d bytes.", length);
-	text = (char*) malloc (length);
-
-	read(client_socket, text, length);
-	fprintf(stderr,"\n\n   Mensagem = %s\n\n", text);
-	//free (text);
-	sleep(1);
-
-	fprintf(stderr, "Mandando mensagem ao cliente... ");
-	length = strlen(b) + 1;
-	write(client_socket, &length, sizeof(length));
-	write(client_socket, b, length);
-	fprintf(stderr, "Feito!\n");
-
-	if (!strcmp (text, "sair"))
-	{
-		fprintf(stderr, "Cliente pediu para o servidor fechar.\n");
-		end_server();
-	}
-     
-         system("clear");
-       int param = atoi(text);
-        switch(param)
-        {
-            case 111:
-                printf("oi zente!!\n");
-                break;
-            case 112:
-                printf("oi galera!!");
-                break;
-            default:
-                printf("Digite uma opcao valida\n");
-        }
-        free(text);
-} 
 
 void end_server(void)
 {

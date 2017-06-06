@@ -1,0 +1,4 @@
+servidor: servidor.c
+	gcc $(CFLAGS) servido_tcp.c -o 02_servidor_tcp -lwiringPi 
+clean:
+	rm -r *.o
